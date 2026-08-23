@@ -44,7 +44,7 @@ GVAR(waitUntilAndExecArray) = [];
     // and nothing to advance. Reading the three slots this needs is measurably
     // cheaper than destructuring all six with params.
     {
-        [_x select 4, _x select 5] call (_x select 0);
+        (_x select [4,2]) call (_x select 0);
     } forEach GVAR(eachFrameHandlerArray);
 
 
