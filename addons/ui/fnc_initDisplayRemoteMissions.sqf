@@ -74,7 +74,7 @@ _ctrlMaps ctrlAddEventHandler ["LBSelChanged", {
 }];
 
 private _mapSelected = uiNamespace getVariable [QGVAR(lastMap), ""];
-if (_mapSelected isEqualTo "") then {
+if (_mapSelected isEqualTo "" || {!(_mapSelected isEqualType "")}) then {
     _mapSelected = _ctrlMaps lbText lbCurSel _ctrlMaps; // get selected map before sort
 };
 
