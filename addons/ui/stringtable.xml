@@ -30,6 +30,10 @@
             <Chinesesimp>显示所有任务</Chinesesimp>
             <Turkish>Tüm görevleri göster</Turkish>
         </Key>
+        <Key ID="STR_CBA_UI_AutoExpandOptions">
+            <English>Automatically expand Options menu</English>
+            <Russian>Автоматически раскрывать меню Настройки</Russian>
+        </Key>
         <Key ID="STR_CBA_UI_Category">
             <English>User Interface</English>
             <Czech>Uživatelské rozhraní</Czech>
@@ -61,6 +65,21 @@
             <Chinese>社群基礎模組 - 使用者介面</Chinese>
             <Chinesesimp>社群基础模组 - 玩家界面</Chinesesimp>
             <Turkish>Community Base Addons - Kullanıcı Arayüzü</Turkish>
+        </Key>
+        <Key ID="STR_CBA_UI_ContactServerAdmin">
+            <English>Contact the server admin.</English>
+            <Czech>Kontaktujte správce serveru.</Czech>
+            <French>Contacter l'administrateur du serveur.</French>
+            <Spanish>Póngase en contacto con el administrador del servidor</Spanish>
+            <Italian>Contatta l'amministratore del server.</Italian>
+            <Polish>Kontakt z administratorem serwera</Polish>
+            <Russian>Уведомить администратора сервера.</Russian>
+            <German>Serveradministrator benachrichtigen.</German>
+            <Korean>서버 관리자에게 문의하십시오.</Korean>
+            <Japanese>サーバー管理者に連絡をして下さい。</Japanese>
+            <Chinese>聯絡伺服器的管理員</Chinese>
+            <Chinesesimp>联系服务器管理员</Chinesesimp>
+            <Turkish>Sunucu yöneticisiyle iletişime geç.</Turkish>
         </Key>
         <Key ID="STR_CBA_UI_CustomMissions">
             <English>Show custom missions</English>
@@ -314,21 +333,6 @@
             <Chinese>設定是否當連線到伺服器時儲存密碼</Chinese>
             <Chinesesimp>设置是否存储连接服务器时输入的密码。</Chinesesimp>
             <Turkish>Çok oyunculu bir sunucuya bağlanırken girilen şifreleri kaydetme ayarı.</Turkish>
-        </Key>
-        <Key ID="STR_CBA_Ui_ContactServerAdmin">
-            <English>Contact the server admin.</English>
-            <Czech>Kontaktujte správce serveru.</Czech>
-            <French>Contacter l'administrateur du serveur.</French>
-            <Spanish>Póngase en contacto con el administrador del servidor</Spanish>
-            <Italian>Contatta l'amministratore del server.</Italian>
-            <Polish>Kontakt z administratorem serwera</Polish>
-            <Russian>Уведомить администратора сервера.</Russian>
-            <German>Serveradministrator benachrichtigen.</German>
-            <Korean>서버 관리자에게 문의하십시오.</Korean>
-            <Japanese>サーバー管理者に連絡をして下さい。</Japanese>
-            <Chinese>聯絡伺服器的管理員</Chinese>
-            <Chinesesimp>联系服务器管理员</Chinesesimp>
-            <Turkish>Sunucu yöneticisiyle iletişime geç.</Turkish>
         </Key>
     </Package>
 </Project>

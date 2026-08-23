@@ -42,6 +42,8 @@
 // looks the variable up by name, which measured ~310ns per handler.
 // getVariable supplies the default directly. The [...] param [0, []] this replaces was added to
 // stop undefined events erroring (79857b37), which the default covers, and it cost ~158ns more.
+#define LAST_ID_KEY "#lastId"
+
 #define CALL_EVENT(args,event) {\
     args call _x;\
 } forEach +(GVAR(eventNamespace) getVariable [event, []]) // copy array so events can be removed while iterating safely
