@@ -29,14 +29,25 @@ params [["_string", "", [""]], ["_find", "", [""]], ["_replace", "", [""]]];
 // "1" find "" -> 0
 if (_find == "") exitWith {_string};
 
-private _result = "";
-private _offset = count (_find splitString "");
+// building the pattern costs more than this check, and most calls don't match
+if (_string find _find == -1) exitWith {_string};
 
-while {_string find _find != -1} do {
-    private _index = _string find _find;
+// what is searched for is a literal, regexReplace wants a pattern
+private _pattern = _find call CBA_fnc_escapeRegex;
 
-    _result = _result + (_string select [0, _index]) + _replace;
-    _string = _string select [_index + _offset];
+// and what it is replaced with is a literal too, but the replacement is not a
+// pattern - it is Perl format, where "$" starts a substitution ($&, $1) and "\"
+// starts an escape (\U, \L). Doubling both is what writes them out as themselves.
+private _format = _replace;
+
+if (_format find "\" != -1) then {
+    _format = _format regexReplace ["\\", "\\\\"];
 };
 
-_result + _string
+if (_format find "$" != -1) then {
+    _format = _format regexReplace ["\$", "$$$$"];
+};
+
+// with no flags the engine defaults to "gi", and this function is case-dependent,
+// so global has to be asked for explicitly to get case-sensitive with it
+_string regexReplace [_pattern + "/g", _format] // return
