@@ -40,7 +40,7 @@ _ctrlMissionsButton ctrlSetText localize "STR_DISP_MP_DS_MISSIONS";
 
 _ctrlMissionsButton ctrlAddEventHandler ["ButtonClick", {serverCommand "#missions"}];
 
-private _fnc_missionButtonControl = {
+private _fnc_missionsButtonControl = {
     params ["_display"];
     private _ctrlMissionsButton = _display displayCtrl IDC_RESTART;
     if (ctrlShown _ctrlMissionsButton) then {
@@ -49,5 +49,5 @@ private _fnc_missionButtonControl = {
         if (serverCommandAvailable "#missions") then {_ctrlMissionsButton ctrlShow true};
     };
 };
-_display displayAddEventHandler ["MouseMoving", _fnc_missionButtonControl];
-_display displayAddEventHandler ["MouseHolding", _fnc_missionButtonControl];
+_display displayAddEventHandler ["MouseMoving", _fnc_missionsButtonControl];
+_display displayAddEventHandler ["MouseHolding", _fnc_missionsButtonControl];
