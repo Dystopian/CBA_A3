@@ -42,7 +42,7 @@ _ctrlOverwriteClient ctrlShow _showClient;
 _ctrlOverwriteMission ctrlShow _showMission;
 
 // a checkbox that isn't there can't be ticked either. Whether the ones that are
-// can be is not this function's to answer, so it only ever takes that away -
+// can be is not this function's task to answer, so it only ever takes that away -
 // FUNC(gui_setRowEnabled) and the row's updateUI_priority own the other half.
 _ctrlOverwriteClient ctrlEnable (_showClient && ctrlEnabled _ctrlOverwriteClient);
 _ctrlOverwriteMission ctrlEnable (_showMission && ctrlEnabled _ctrlOverwriteMission);
