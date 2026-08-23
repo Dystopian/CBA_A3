@@ -45,12 +45,12 @@ private _testSettings = [];
 
     _testSettings pushBack _setting;
 } forEach [
-    ["a1", _testCategoryA, "", 0],
-    ["a2", _testCategoryA, "Folded", 0],
-    ["a3", _testCategoryA, "Folded", 1], // global, forced to overwrite the clients
-    ["a4", _testCategoryA, "Folded", 2], // local, can't overwrite anything
-    ["b1", _testCategoryB, "", 0],
-    ["b2", _testCategoryB, "", 0]
+    ["a1", _testCategoryA, "", SETTING_LOCAL_OVERRIDABLE],
+    ["a2", _testCategoryA, "Folded", SETTING_LOCAL_OVERRIDABLE],
+    ["a3", _testCategoryA, "Folded", SETTING_GLOBAL_ONLY], // always overwrites the clients
+    ["a4", _testCategoryA, "Folded", SETTING_LOCAL_ONLY], // can't be overwritten
+    ["b1", _testCategoryB, "", SETTING_LOCAL_OVERRIDABLE],
+    ["b2", _testCategoryB, "", SETTING_LOCAL_OVERRIDABLE]
 ];
 
 // ----- every visible row's checkboxes have to match the source it is showing
@@ -69,11 +69,11 @@ private _fnc_check = {
         // then is invisible either way
         if (ctrlShown _x) then {
             private _setting = ROW_SETTING(_x);
-            private _isGlobal = _x getVariable [QGVAR(isGlobal), 0];
+            private _isGlobal = _x getVariable [QGVAR(isGlobal), SETTING_LOCAL_OVERRIDABLE];
             private _enabled = ROW_ENABLED(_x);
 
-            private _showClient = _source isNotEqualTo "client" && _isGlobal < 2;
-            private _showMission = _source isEqualTo "server" && _isGlobal < 2;
+            private _showClient = _source isNotEqualTo "client" && _isGlobal isNotEqualTo SETTING_LOCAL_ONLY;
+            private _showMission = _source isEqualTo "server" && _isGlobal isNotEqualTo SETTING_LOCAL_ONLY;
 
             private _ctrlOverwriteClient = _x controlsGroupCtrl IDC_SETTING_OVERWRITE_CLIENT;
             private _ctrlOverwriteMission = _x controlsGroupCtrl IDC_SETTING_OVERWRITE_MISSION;
@@ -98,6 +98,11 @@ private _fnc_check = {
             // and neither of them may switch a locked row back on
             if (!_enabled && {ctrlEnabled _ctrlOverwriteClient || ctrlEnabled _ctrlOverwriteMission}) then {
                 _bad pushBack [_setting, "checkbox on, locked row"];
+            };
+
+            // the mission can't overwrite a local only setting, so it can't set one
+            if (_source isEqualTo "mission" && _isGlobal isEqualTo SETTING_LOCAL_ONLY && _enabled) then {
+                _bad pushBack [_setting, "local only row editable from mission"];
             };
         };
     } forEach (_ctrlOptionsGroup getVariable [QGVAR(rows), []]);

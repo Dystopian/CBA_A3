@@ -27,13 +27,13 @@ Author:
 
 params ["_controlsGroup"];
 
-// a global setting always overwrites the clients and a local one never leaves
-// the client it is set on, neither of them has anything to point anywhere
-private _isGlobal = _controlsGroup getVariable [QGVAR(isGlobal), 0];
+// a local setting never leaves the client it is set on, so it has nothing to
+// point anywhere
+private _isLocalOnly = ROW_IS_LOCAL_ONLY(_controlsGroup);
 private _source = ROW_SOURCE(_controlsGroup);
 
-private _showClient = _source isNotEqualTo "client" && _isGlobal < 2;
-private _showMission = _source isEqualTo "server" && _isGlobal < 2;
+private _showClient = _source isNotEqualTo "client" && !_isLocalOnly;
+private _showMission = _source isEqualTo "server" && !_isLocalOnly;
 
 private _ctrlOverwriteClient = _controlsGroup controlsGroupCtrl IDC_SETTING_OVERWRITE_CLIENT;
 private _ctrlOverwriteMission = _controlsGroup controlsGroupCtrl IDC_SETTING_OVERWRITE_MISSION;
