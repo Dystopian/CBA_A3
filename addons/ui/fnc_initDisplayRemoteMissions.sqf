@@ -38,9 +38,9 @@ private _authorFullLocalized = localize "STR_FORMAT_AUTHOR_SCRIPTED";
     _worldNames set [_description, _worldname];
 
     private _pictureMap = getText (_worldConfig >> "pictureMap");
-    if (_pictureMap == "") then {_pictureMap = _defaultPicture}; // can be empty
+    if (_pictureMap isEqualTo "") then {_pictureMap = _defaultPicture}; // can be empty
     private _author = getText (_worldConfig >> "author");
-    if (_author == "") then {_author = _defaultAuthor};
+    if (_author isEqualTo "") then {_author = _defaultAuthor};
     _author = format [_authorFullLocalized, _author];
 
     _worldFeatures set [_worldName, [_pictureMap, _author]];
