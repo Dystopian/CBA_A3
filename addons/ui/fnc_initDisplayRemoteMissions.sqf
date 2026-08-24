@@ -73,19 +73,22 @@ _ctrlMaps ctrlAddEventHandler ["LBSelChanged", {
     _ctrlIslandPanorama ctrlSetTooltip _author;
 }];
 
-private _mapSelected = uiNamespace getVariable [QGVAR(lastMap), ""];
-if (_mapSelected isEqualTo "" || {!(_mapSelected isEqualType "")}) then {
-    _mapSelected = _ctrlMaps lbText lbCurSel _ctrlMaps; // get selected map before sort
-};
-
 lbSort _ctrlMaps;
+_ctrlMaps lbSetCurSel 0;
+
+private _worldSelected = uiNamespace getVariable [QGVAR(lastWorld), ""];
+if (_worldSelected isEqualTo "" || {!(_worldSelected isEqualType "")}) then {
+    // worldName == last loaded world
+    // when startup parameter -world=empty and game is just started, worldName == ""
+    _worldSelected = worldName;
+};
 
 // Show worldnames as tooltips on map list
 for "_index" from 0 to ((lbSize _ctrlMaps) - 1) do {
     private _description = _ctrlMaps lbText _index;
     private _worldName = _worldNames getOrDefault [_description, ""];
     _ctrlMaps lbSetTooltip [_index, _worldName];
-    if (_description == _mapSelected) then {
+    if (_worldName == _worldSelected) then {
         _ctrlMaps lbSetCurSel _index;
     };
 };
@@ -95,8 +98,8 @@ private _fnc_onMissionSelected = {
     private _display = ctrlParent _ctrl;
 
     private _ctrlMaps = _display displayCtrl IDC_SERVER_ISLAND;
-    private _mapSelected = _ctrlMaps lbText lbCurSel _ctrlMaps;
-    uiNamespace setVariable [QGVAR(lastMap), _mapSelected];
+    private _worldSelected = _ctrlMaps lbData lbCurSel _ctrlMaps;
+    uiNamespace setVariable [QGVAR(lastWorld), _worldSelected];
 
     private _ctrlMissions = _display displayCtrl IDC_SERVER_MISSION;
     private _missionSelected = _ctrlMissions lbData lbCurSel _ctrlMissions;
