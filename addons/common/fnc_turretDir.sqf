@@ -27,7 +27,7 @@ SCRIPT(turretDir);
 
 params [["_vehicle", objNull, [objNull]], ["_turret", [-1], [[]]], ["_relativeToModel", false, [false]]];
 
-if (!alive _vehicle) exitWith {};
+if (!alive _vehicle) exitWith { [0,0] };
 
 private _turretConfig = [_vehicle, _turret] call CBA_fnc_getTurret;
 
