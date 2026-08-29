@@ -5,6 +5,9 @@
 
 GVAR(perFrameHandlerArray) = [];
 GVAR(perFrameHandlersToRemove) = [];
+// zero delay handlers are kept apart, they have no ETA to check or advance
+GVAR(eachFrameHandlerArray) = [];
+GVAR(eachFrameHandlersToRemove) = [];
 GVAR(lastTickTime) = diag_tickTime;
 
 GVAR(waitAndExecArray) = [];
@@ -36,6 +39,13 @@ GVAR(waitUntilAndExecArray) = [];
             [_args, _handle] call _function;
         };
     } forEach GVAR(perFrameHandlerArray);
+
+    // Execute zero delay handlers. They always run, so there is no ETA to check
+    // and nothing to advance. Reading the three slots this needs is measurably
+    // cheaper than destructuring all six with params.
+    {
+        (_x select [4,2]) call (_x select 0);
+    } forEach GVAR(eachFrameHandlerArray);
 
 
     // Execute wait and execute functions
