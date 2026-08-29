@@ -31,7 +31,7 @@ if (_string isEqualTo "") exitWith {""};
 
 // Detect if and how unicode support was forced
 private _unicode = count "д" == 1;
-private _forceUnicode = count "д" == 1;
+private _forceUnicode = count "д" == 1; // differs from _unicode if forceUnicode was 1
 
 // Force unicode support
 forceUnicode 0;
