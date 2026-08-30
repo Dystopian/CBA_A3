@@ -155,7 +155,7 @@ private _fnc_storeMapMissions = {_this spawn {isNil { // delay a frame
         // delete map suffix
         private _nameArray = _name splitString ".";
         if (count _nameArray > 1 && {_nameArray select -1 == _map}) then {
-            _nameArray resize (count _nameArray - 1);
+            _nameArray deleteAt [-1];
             _name = _nameArray joinString ".";
         };
 
