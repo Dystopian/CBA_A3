@@ -152,11 +152,12 @@ private _fnc_storeMapMissions = {_this spawn {isNil { // delay a frame
         with uiNamespace do {
             _name = _name call CBA_fnc_decodeURL;
         };
-        // delete map suffix
-        private _nameArray = _name splitString ".";
-        if (count _nameArray > 1 && {_nameArray select -1 == _map}) then {
-            _nameArray deleteAt [-1];
-            _name = _nameArray joinString ".";
+        if (profileNamespace getVariable [QGVAR(hideMissionWorldSuffix), false]) then {
+            private _nameArray = _name splitString ".";
+            if (count _nameArray > 1 && {_nameArray select -1 == _map}) then {
+                _nameArray deleteAt [-1];
+                _name = _nameArray joinString ".";
+            };
         };
 
         private _value = _ctrlMissions lbValue _i;
